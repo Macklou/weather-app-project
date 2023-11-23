@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>GitHub repo example</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="weather-container">
+      <div
+        class="background-image"
+        role="img"
+        aria-label="Background Image"
+      ></div>
+
+      <div class="overlay">
+        <header>
+          <form>
+            <input
+              type="search"
+              placeholder="Enter a city.."
+              required
+              class="search-input"
+            />
+            <input type="submit" value="Search" class="search-button" />
+          </form>
+        </header>
+        <main>
+          <div class="background-image"></div>
+          <div class="current-weather" id="belfast">
+            <div class="city-details">
+              <h1 class="current-city">Belfast</h1>
+              <p class="current-details">
+                Saturday 15:32, moderate rain <br />
+                Humidity: <strong>87%</strong>, Wind: <strong>7.2km/h</strong>
+              </p>
+              <div class="current-temperature">
+                <span class="current-temperature-icon">☀️</span>
+                <span class="current-temperature-value">21</span>
+                <span class="current-temperature-unit">°C</span>
+              </div>
+            </div>
+          </div>
+          <div class="current-weather" id="sydney" style="display: none">
+            <div class="city-details">
+              <h1 class="current-city">Sydney</h1>
+              <p class="current-details">
+                Saturday 15:32, moderate rain <br />
+                Humidity: <strong>87%</strong>, Wind: <strong>7.2km/h</strong>
+              </p>
+              <div class="current-temperature">
+                <span class="current-temperature-icon">☀️</span>
+                <span class="current-temperature-value">31</span>
+                <span class="current-temperature-unit">°C</span>
+              </div>
+            </div>
+          </div>
+          <div class="current-weather" id="paris" style="display: none">
+            <div class="city-details">
+              <h1 class="current-city">Paris</h1>
+              <p class="current-details">
+                Saturday 15:32, moderate rain <br />
+                Humidity: <strong>87%</strong>, Wind: <strong>7.2km/h</strong>
+              </p>
+              <div class="current-temperature">
+                <span class="current-temperature-icon">☀️</span>
+                <span class="current-temperature-value">10</span>
+                <span class="current-temperature-unit">°C</span>
+              </div>
+            </div>
+          </div>
+          <div class="current-weather" id="berlin" style="display: none">
+            <div class="city-details">
+              <h1 class="current-city">Berlin</h1>
+              <p class="current-details">
+                Saturday 15:32, moderate rain <br />
+                Humidity: <strong>87%</strong>, Wind: <strong>7.2km/h</strong>
+              </p>
+              <div class="current-temperature">
+                <span class="current-temperature-icon">☀️</span>
+                <span class="current-temperature-value">-2</span>
+                <span class="current-temperature-unit">°C</span>
+              </div>
+            </div>
+          </div>
+        </main>
+        <footer>
+          <p>
+            This project was coded by
+            <a href="#" target="_blank">Louise</a> and is
+            <a href="#" target="_blank">on GitHub</a> and
+            <a href="#" target="_blank">hosted on Netlify</a>
+          </p>
+        </footer>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
