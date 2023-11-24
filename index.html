@@ -102,6 +102,80 @@
         </footer>
       </div>
     </div>
-    <script src="script.js"></script>
+    <script>
+      const apiKey = "8f59873f1aa9095582ac6328f58ef24b";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.querySelector("form");
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const input = document.querySelector(".search-input");
+          const cityName = input.value.trim();
+
+          if (cityName !== "") {
+            try {
+              const currentWeatherResponse = await fetch(
+                `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`
+              );
+              const currentWeatherData = await currentWeatherResponse.json();
+
+              const forecastResponse = await fetch(
+                `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=${apiKey}`
+              );
+              const forecastData = await forecastResponse.json();
+
+              displayCurrentWeather(currentWeatherData);
+
+              displayForecast(forecastData);
+            } catch (error) {
+              console.error("Error fetching weather data:", error);
+            }
+          }
+        });
+      });
+
+      function displayCurrentWeather(data) {
+        const currentWeatherElement =
+          document.querySelector(".current-weather");
+        const cityElement =
+          currentWeatherElement.querySelector(".current-city");
+        const detailsElement =
+          currentWeatherElement.querySelector(".current-details");
+        const temperatureIconElement = currentWeatherElement.querySelector(
+          ".current-temperature-icon"
+        );
+        const temperatureValueElement = currentWeatherElement.querySelector(
+          ".current-temperature-value"
+        );
+        const temperatureUnitElement = currentWeatherElement.querySelector(
+          ".current-temperature-unit"
+        );
+
+        cityElement.textContent = data.name;
+        detailsElement.innerHTML = `${new Date().toLocaleString()}, ${
+          data.weather[0].description
+        } <br />
+      Humidity: <strong>${data.main.humidity}%</strong>, Wind: <strong>${
+          data.wind.speed
+        }m/s</strong>`;
+
+        temperatureIconElement.textContent = "☀️";
+        temperatureValueElement.textContent = Math.round(data.main.temp);
+        temperatureUnitElement.textContent = "°C";
+
+        currentWeatherElement.style.display = "flex";
+
+        const otherWeatherElements = document.querySelectorAll(
+          ".current-weather:not(#" + data.name.toLowerCase() + ")"
+        );
+        otherWeatherElements.forEach((element) => {
+          element.style.display = "none";
+        });
+      }
+
+      function displayForecast(data) {
+        console.log("5-day forecast data:", data);
+      }
+    </script>
   </body>
 </html>
