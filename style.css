@@ -163,3 +163,13 @@ footer {
   font-size: 18px;
   color: #333;
 }
+.forecast-container {
+  display: flex;
+  overflow-x: auto;
+}
+
+.forecast-card {
+  flex: 0 0 auto;
+  margin-right: 10px;
+  text-align: center;
+}
