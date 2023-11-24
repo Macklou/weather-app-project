@@ -124,7 +124,9 @@
         } <br /> Humidity: <strong>${
           data.main.humidity
         }%</strong>, Wind: <strong>${data.wind.speed}m/s</strong>`;
-        temperatureIconElement.textContent = "☀️";
+        const iconCode = data.weather[0].icon;
+        const iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
+        temperatureIconElement.innerHTML = `<img src="${iconUrl}" alt="Weather Icon" />`;
         temperatureValueElement.textContent = Math.round(data.main.temp);
         temperatureUnitElement.textContent = "°C";
 
