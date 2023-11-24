@@ -91,7 +91,7 @@
               </div>
             </div>
           </div>
-          <div class="forecast-section" style="display: none">
+          <div class="forecast-section">
             <h2 class="forecast-title">5-Day Forecast</h2>
             <div class="forecast-container"></div>
           </div>
@@ -138,6 +138,9 @@
       const apiKey = "8f59873f1aa9095582ac6328f58ef24b";
 
       document.addEventListener("DOMContentLoaded", () => {
+        const forecastSection = document.querySelector(".forecast-section");
+        forecastSection.style.display = "none";
+
         const form = document.querySelector("form");
         form.addEventListener("submit", async (e) => {
           e.preventDefault();
@@ -159,55 +162,14 @@
               displayCurrentWeather(currentWeatherData);
 
               displayForecast(forecastData);
+
+              forecastSection.style.display = "block";
             } catch (error) {
               console.error("Error fetching weather data:", error);
             }
           }
         });
       });
-
-      function displayCurrentWeather(data) {
-        const currentWeatherElement =
-          document.querySelector(".current-weather");
-        const cityElement =
-          currentWeatherElement.querySelector(".current-city");
-        const detailsElement =
-          currentWeatherElement.querySelector(".current-details");
-        const temperatureIconElement = currentWeatherElement.querySelector(
-          ".current-temperature-icon"
-        );
-        const temperatureValueElement = currentWeatherElement.querySelector(
-          ".current-temperature-value"
-        );
-        const temperatureUnitElement = currentWeatherElement.querySelector(
-          ".current-temperature-unit"
-        );
-
-        cityElement.textContent = data.name;
-        detailsElement.innerHTML = `${new Date().toLocaleString()}, ${
-          data.weather[0].description
-        } <br />
-      Humidity: <strong>${data.main.humidity}%</strong>, Wind: <strong>${
-          data.wind.speed
-        }m/s</strong>`;
-
-        temperatureIconElement.textContent = "☀️";
-        temperatureValueElement.textContent = Math.round(data.main.temp);
-        temperatureUnitElement.textContent = "°C";
-
-        currentWeatherElement.style.display = "flex";
-
-        const otherWeatherElements = document.querySelectorAll(
-          ".current-weather:not(#" + data.name.toLowerCase() + ")"
-        );
-        otherWeatherElements.forEach((element) => {
-          element.style.display = "none";
-        });
-      }
-
-      function displayForecast(data) {
-        console.log("5-day forecast data:", data);
-      }
     </script>
   </body>
 </html>
