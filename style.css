@@ -173,3 +173,11 @@ footer {
   margin-right: 10px;
   text-align: center;
 }
+.forecast-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.forecast-card {
+  flex: 0 0 18%;
+}
