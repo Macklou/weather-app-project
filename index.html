@@ -62,6 +62,47 @@
       </div>
     </div>
     <script>
+      function getTemperatureEmoji(temperature) {
+        if (temperature >= 30) {
+          return "🔥"; // Hot
+        } else if (temperature >= 20) {
+          return "☀️"; // Warm
+        } else if (temperature >= 10) {
+          return "⛅"; // Moderate
+        } else {
+          return "❄️"; // Cold
+        }
+      }
+
+      function displayForecast(data) {
+        const forecastSection = document.querySelector(".forecast-section");
+        const forecastContainer = document.querySelector(".forecast-container");
+
+        forecastContainer.innerHTML = "";
+
+        forecastSection.style.display = "block";
+
+        for (let i = 0; i < data.list.length; i += 8) {
+          const forecast = data.list[i];
+          const forecastCard = document.createElement("div");
+          forecastCard.classList.add("forecast-card");
+
+          const date = new Date(forecast.dt * 1000);
+          const day = date.toLocaleDateString("en-US", { weekday: "short" });
+          const temperature = Math.round(forecast.main.temp);
+          const temperatureEmoji = getTemperatureEmoji(temperature);
+
+          forecastCard.innerHTML = `
+      <p class="forecast-day">${day}</p>
+      <div class="forecast-details">
+        <span class="forecast-icon">${temperatureEmoji}</span>
+        <span class="forecast-temperature">${temperature}°C</span>
+      </div>
+    `;
+
+          forecastContainer.appendChild(forecastCard);
+        }
+      }
       function displayForecast(data) {
         const forecastContainer = document.querySelector(".forecast-container");
         forecastContainer.innerHTML = "";
