@@ -91,6 +91,10 @@
               </div>
             </div>
           </div>
+          <div class="forecast-section" style="display: none">
+            <h2 class="forecast-title">5-Day Forecast</h2>
+            <div class="forecast-container"></div>
+          </div>
         </main>
         <footer>
           <p>
@@ -103,6 +107,34 @@
       </div>
     </div>
     <script>
+      function displayForecast(data) {
+        const forecastSection = document.querySelector(".forecast-section");
+        const forecastContainer = document.querySelector(".forecast-container");
+
+        forecastContainer.innerHTML = "";
+
+        forecastSection.style.display = "block";
+
+        for (let i = 0; i < data.list.length; i += 8) {
+          const forecast = data.list[i];
+          const forecastCard = document.createElement("div");
+          forecastCard.classList.add("forecast-card");
+
+          const date = new Date(forecast.dt * 1000);
+          const day = date.toLocaleDateString("en-US", { weekday: "short" });
+          const temperature = Math.round(forecast.main.temp);
+
+          forecastCard.innerHTML = `
+      <p class="forecast-day">${day}</p>
+      <div class="forecast-details">
+        <span class="forecast-icon">☀️</span>
+        <span class="forecast-temperature">${temperature}°C</span>
+      </div>
+    `;
+
+          forecastContainer.appendChild(forecastCard);
+        }
+      }
       const apiKey = "8f59873f1aa9095582ac6328f58ef24b";
 
       document.addEventListener("DOMContentLoaded", () => {
