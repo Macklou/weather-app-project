@@ -11,7 +11,16 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="style.css" />
+    <style>
+      .forecast-container {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .forecast-card {
+        flex: 0 0 18%;
+      }
+    </style>
   </head>
   <body>
     <div class="weather-container">
@@ -64,59 +73,31 @@
     <script>
       function getTemperatureEmoji(temperature) {
         if (temperature >= 30) {
-          return "🔥"; // Hot
+          return "🔥";
         } else if (temperature >= 20) {
-          return "☀️"; // Warm
+          return "☀️";
         } else if (temperature >= 10) {
-          return "⛅"; // Moderate
+          return "⛅";
         } else {
-          return "❄️"; // Cold
+          return "❄️";
         }
       }
 
       function displayForecast(data) {
-        const forecastSection = document.querySelector(".forecast-section");
         const forecastContainer = document.querySelector(".forecast-container");
-
         forecastContainer.innerHTML = "";
-
-        forecastSection.style.display = "block";
-
         for (let i = 0; i < data.list.length; i += 8) {
           const forecast = data.list[i];
           const forecastCard = document.createElement("div");
           forecastCard.classList.add("forecast-card");
-
           const date = new Date(forecast.dt * 1000);
           const day = date.toLocaleDateString("en-US", { weekday: "short" });
           const temperature = Math.round(forecast.main.temp);
           const temperatureEmoji = getTemperatureEmoji(temperature);
-
-          forecastCard.innerHTML = `
-      <p class="forecast-day">${day}</p>
-      <div class="forecast-details">
-        <span class="forecast-icon">${temperatureEmoji}</span>
-        <span class="forecast-temperature">${temperature}°C</span>
-      </div>
-    `;
-
-          forecastContainer.appendChild(forecastCard);
-        }
-      }
-      function displayForecast(data) {
-        const forecastContainer = document.querySelector(".forecast-container");
-        forecastContainer.innerHTML = "";
-        for (let i = 0; i < data.list.length; i += 8) {
-          const forecast = data.list[i];
-          const forecastCard = document.createElement("div");
-          forecastCard.classList.add("forecast-card");
-          const date = new Date(forecast.dt * 1000);
-          const day = date.toLocaleDateString("en-US", { weekday: "short" });
-          const temperature = Math.round(forecast.main.temp);
           forecastCard.innerHTML = `
             <p class="forecast-day">${day}</p>
             <div class="forecast-details">
-              <span class="forecast-icon">☀️</span>
+              <span class="forecast-icon">${temperatureEmoji}</span>
               <span class="forecast-temperature">${temperature}°C</span>
             </div>
           `;
@@ -179,7 +160,6 @@
               displayCurrentWeather(currentWeatherData);
               displayForecast(forecastData);
 
-              // Reset the input field and keep the form in focus
               input.value = "";
               input.focus();
             } catch (error) {
